@@ -2,7 +2,7 @@ subprojects {
     apply plugin: "org.jetbrains.dokka"
 
     dokkaHtml {
-        outputDirectory.set(file("$rootDir/documentation/html"))
+        outputDirectory.set(file("$rootDir/docs/html"))
 
         // Suppress obvious functions like default toString or equals. Defaults to true
         suppressObviousFunctions.set(true)
@@ -23,15 +23,15 @@ subprojects {
 }
 
 tasks.dokkaHtmlMultiModule.configure {
-    outputDirectory.set(file("$rootDir/documentation/html"))
+    outputDirectory.set(file("$rootDir/docs/html"))
 }
 
 task dokkaImportBkpIntoHtml {
-    group 'documentation'
+    group 'docs'
     doLast {
         copy {
-            from "$rootDir/documentation/bkp"
-            into "$rootDir/documentation/html"
+            from "$rootDir/docs/bkp"
+            into "$rootDir/docs/html"
         }
     }
 }
@@ -39,11 +39,11 @@ task dokkaImportBkpIntoHtml {
 task dokkaCreateDocs {
     dependsOn dokkaHtmlMultiModule
 
-    group 'documentation'
+    group 'docs'
     doLast {
         copy {
-            from "$rootDir/documentation/bkp"
-            into "$rootDir/documentation/html"
+            from "$rootDir/docs/bkp"
+            into "$rootDir/docs/html"
         }
     }
 }
